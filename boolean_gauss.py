@@ -6,6 +6,7 @@
 
     Author : Arthur Correnson 
 """
+import sys
 
 
 def copy(M):
@@ -113,3 +114,13 @@ def to_csv(M):
         for row in line:
             print(row, end='; ')
         print('')
+
+
+def from_csv(file):
+    M = []
+    with open(file) as f:
+        for line in f:
+            if line[0] != '#':
+                M.append(list(map(lambda x : int(x), line.split(';')[:-1])))
+
+    return M
