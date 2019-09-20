@@ -113,12 +113,3 @@ def to_csv(M):
         for row in line:
             print(row, end='; ')
         print('')
-
-
-to_csv(gaussian_elimination(
-    [
-        [1, 1, 0],
-        [1, 0, 1],
-    ]
-    ))
-
