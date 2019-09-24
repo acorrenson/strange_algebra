@@ -132,7 +132,25 @@ def matmul(Ma, Mb):
     for i in range(size):
         for j in range(size):
             for k in range(size):
-                Mres[i][j] ^= Ma[i][k] * Mb[k][j]
+                Mres[i][j] ^= Ma[i][k] and Mb[k][j]
+
+    return Mres
+
+
+def matmul2(Ma, Mb):
+    """
+    @brief      Implements boolean -> integer matrix mult .
+    """
+    
+    assert len(Ma[0]) == len(Mb), \
+        "Ma and Mb sizes aren't compatible"
+
+    size = len(Mb)
+    Mres = [[0 for i in range(size)] for j in range(size)]
+    for i in range(size):
+        for j in range(size):
+            for k in range(size):
+                Mres[i][j] ^= Ma[i][k]*255 and Mb[k][j]
 
     return Mres
 
