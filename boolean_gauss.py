@@ -105,6 +105,70 @@ def gaussian_elimination(M):
     return M_copy
 
 
+def identity(size):
+    """
+    @brief      Return Identity matrix.
+    """
+
+    assert size > 0, "A size should be > 0"
+
+    M = [[0 for i in range(size)] for j in range(size)]
+    for i in range(size):
+        M[i][i] = 1;
+
+    return M
+
+
+def matmul(Ma, Mb):
+    """
+    @brief      Implements matrix multiplication.
+    """
+    
+    assert len(Ma[0]) == len(Mb), \
+        "Ma and Mb sizes aren't compatible"
+
+    size = len(Mb)
+    Mres = [[0 for i in range(size)] for j in range(size)]
+    for i in range(size):
+        for j in range(size):
+            for k in range(size):
+                Mres[i][j] ^= Ma[i][k] * Mb[k][j]
+
+    return Mres
+
+
+def inverse(M):
+    """
+    @brief      Implements matrix inversion.
+    """
+
+    assert len(M) == len(M[0]), \
+        "M should be a square matrix"
+    assert is_boolean(M), \
+        "M should be a boolean matrix"
+    
+    size = len(M)
+    M_copy = copy(M)
+    M_inv  = identity(size)
+    
+    # gauss method
+    for j in range(size):
+        search_for_ones(M_copy, j)
+        for i in range(1+j, size):
+            if M_copy[i][j] == 1:
+                M_copy[i] = row_xor(M_copy[i], M_copy[j])
+                M_inv[i] = row_xor(M_inv[i], M_copy[j])
+    
+    for j in range(size):
+        for i in range(1+j, size):
+            print(size-i-1, size-j-1)
+            if M_copy[size-i-1][size-j-1] == 1:
+                M_copy[size-i-1] = row_xor(M_copy[size-i-1], M_copy[size-j-1])
+                M_inv[size-i-1]  = row_xor(M_inv[size-i-1], M_inv[size-j-1])
+
+    return M_inv
+
+
 def to_csv(M):
     """
     @brief      Convert a matric M into CSV format
