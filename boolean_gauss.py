@@ -114,7 +114,7 @@ def identity(size):
 
     M = [[0 for i in range(size)] for j in range(size)]
     for i in range(size):
-        M[i][i] = 1;
+        M[i][i] = 1
 
     return M
 
@@ -191,11 +191,14 @@ def to_csv(M):
     """
     @brief      Convert a matric M into CSV format
     """
-    
+    matCSV=''
     for line in M:
         for row in line:
-            print(row, end='; ')
-        print('')
+            rowStr=str(row)
+            matCSV=matCSV+rowStr+'; '
+        matCSV=matCSV[:-1]
+        matCSV=matCSV+'\n'
+    return matCSV
 
 
 def from_csv(file):
@@ -203,6 +206,6 @@ def from_csv(file):
     with open(file) as f:
         for line in f:
             if line[0] != '#':
-                M.append(list(map(lambda x : int(x), line.split(';')[:-1])))
+                M.append(list(map(lambda x : int(x), line.split(';'))))
 
     return M
