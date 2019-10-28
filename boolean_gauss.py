@@ -114,7 +114,7 @@ def identity(size):
 
     M = [[0 for i in range(size)] for j in range(size)]
     for i in range(size):
-        M[i][i] = 1;
+        M[i][i] = 1
 
     return M
 
@@ -196,6 +196,7 @@ def to_csv(M):
         for row in line:
             rowStr=str(row)
             matCSV=matCSV+rowStr+'; '
+        matCSV=matCSV[:-1]
         matCSV=matCSV+'\n'
     return matCSV
 
