@@ -1,21 +1,30 @@
 from boolean_gauss import *
 import sys
 
-sys.argv #invert f1.txt f2.txt
+command = sys.argv[1]
 
-command=sys.argv[1]
-if command=="invert":
-    #recup fichier
-    nameFile=sys.argv[2]
-    M=from_csv(nameFile)
-    print(M)
-    M=inverse(M)
-    M=to_csv(M)
-
-    nameFile=sys.argv[3]
-    File2=open(nameFile,"w+")
-    File2.write(M)
-
+if command == "invert":
+    # input file
+    file_name = sys.argv[2]
+    mat = from_csv(file_name)
+    
+    # printing
+    print('initial matrix :')
+    print(mat)
+    
+    # inverse
+    mat = inverse(mat)
+    mat_csv = to_csv(mat)
+    
+    # printing
+    print('inverse matrix :')
+    print(mat)
+    
+    # output file
+    file_name = sys.argv[3]
+    open(nameFile,"w+").write(mat_csv)
+    exit(0)
 
 else:
-    print ("this command don't exist")
+    print (f'command "{command}" does\'nt exist')
+    exit(1)
